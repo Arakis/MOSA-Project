@@ -58,8 +58,8 @@ for:
       only:
         - image: Ubuntu1804
 
-    install:
-    - sh: docker pull seblon/mosa-docker-integration
+#    install:
+#    - sh: docker pull seblon/mosa-docker-integration
 
     before_build:
     - echo test

@@ -36,6 +36,9 @@ for:
 
     build_script:
 
+    test_script:
+    - ps: ./mosactl.ps1 test
+
     after_test:
 
     nuget:

@@ -3,8 +3,8 @@ version: '1.8.{build}'
 configuration: Release
 platform: Any CPU
 image:
-- Visual Studio 2017
 - Ubuntu
+- Visual Studio 2017
 
 shallow_clone: true
 
@@ -13,7 +13,7 @@ install:
 - cmd: SET PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5
 
 before_build:
-- nuget restore -Verbosity quiet Source\MOSA.sln
+- nuget restore -Verbosity quiet Source/MOSA.sln
 
 build:
   verbosity: minimal

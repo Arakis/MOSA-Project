@@ -4,7 +4,7 @@ configuration: Release
 platform: Any CPU
 image:
 - Ubuntu
-- Visual Studio 2017
+#- Visual Studio 2017
 
 shallow_clone: true
 
@@ -14,7 +14,8 @@ install:
 
 before_build:
 - sh: sudo apt-key adv --no-tty --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-- sh: echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+- sh: sudo apt install apt-transport-https
+- sh: echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 - sh: sudo apt update
 - sh: sudo apt-get install -y mono-devel
 - sh: sudo apt-get install -y qemu-system-x86

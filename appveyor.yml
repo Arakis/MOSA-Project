@@ -9,53 +9,53 @@ image:
 shallow_clone: true
 
 for:
--
-  matrix:
-    - image: Visual Studio 2017
+  -
+    matrix:
+      - image: Visual Studio 2017
 
 
-  install:
-  #- cmd: choco install InnoSetup
-  - cmd: SET PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5
+    install:
+    #- cmd: choco install InnoSetup
+    - cmd: SET PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5
 
-  before_build:
-  - nuget restore -Verbosity quiet Source/Mosa.sln
+    before_build:
+    - nuget restore -Verbosity quiet Source/Mosa.sln
 
-  build:
-    verbosity: minimal
-    parallel: true
-    project: Source/Mosa.sln
-    publish_nuget: true
+    build:
+      verbosity: minimal
+      parallel: true
+      project: Source/Mosa.sln
+      publish_nuget: true
 
-  after_build:
-  - cmd: ISCC.exe Source/Inno-Setup-Script/Mosa-Installer.iss
+    after_build:
+    - cmd: ISCC.exe Source/Inno-Setup-Script/Mosa-Installer.iss
 
-  build_script:
+    build_script:
 
-  after_test:
+    after_test:
 
-  nuget:
-    project_feed: true
+    nuget:
+      project_feed: true
 
-  test: off
+    test: off
 
-  assembly_info:
-    patch: true
-    file: AssemblyInfo.*
-    assembly_version: "{version}"
-    assembly_file_version: "{version}"
-    assembly_informational_version: "{version}"
+    assembly_info:
+      patch: true
+      file: AssemblyInfo.*
+      assembly_version: "{version}"
+      assembly_file_version: "{version}"
+      assembly_informational_version: "{version}"
 
-  artifacts:
-  - path: 'bin/MOSA Installer/MOSA-Installer.exe'
+    artifacts:
+    - path: 'bin/MOSA Installer/MOSA-Installer.exe'
 
 for:
--
-  matrix:
-    - image: Ubuntu1804
+  -
+    matrix:
+      - image: Ubuntu1804
 
-  install:
-  - sh: docker pull seblon/mosa-docker-integration
+    install:
+    - sh: docker pull seblon/mosa-docker-integration
 
-  build:
-  - sh: echo test
+    build:
+    - sh: echo test

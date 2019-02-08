@@ -4,7 +4,7 @@ configuration: Release
 platform: Any CPU
 image:
 - Ubuntu1804
-#- Visual Studio 2017
+- Visual Studio 2017
 
 shallow_clone: true
 
@@ -22,6 +22,7 @@ for:
     - cmd: SET PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5
 
     before_build:
+    - echo before build
     - nuget restore -Verbosity quiet Source/Mosa.sln
 
     build:
@@ -60,10 +61,13 @@ for:
     install:
     - sh: docker pull seblon/mosa-docker-integration
 
-    build:
+    before_build:
+    - echo test
+
+    build: off
 #      verbosity: minimal
-      parallel: true
-      project: Source/Mosa.sln
+#      parallel: true
+#      project: Source/Mosa.sln
 
     build_script:
     - sh: echo test

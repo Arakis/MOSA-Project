@@ -50,7 +50,8 @@ for:
   - path: 'bin/MOSA Installer/MOSA-Installer.exe'
 
 for:
-- matrix:
+-
+  matrix:
     - image: Ubuntu1804
 
     install:

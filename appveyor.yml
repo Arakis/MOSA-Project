@@ -18,11 +18,11 @@ before_build:
 build:
   verbosity: minimal
   parallel: true
-  project: Source\MOSA.sln
+  project: Source/MOSA.sln
   publish_nuget: true
 
 after_build:
-- cmd: ISCC.exe Source\Inno-Setup-Script\Mosa-Installer.iss
+- cmd: ISCC.exe Source/Inno-Setup-Script/Mosa-Installer.iss
 
 build_script:
 
@@ -41,5 +41,5 @@ assembly_info:
   assembly_informational_version: "{version}"
 
 artifacts:
-- path: 'bin\MOSA Installer\MOSA-Installer.exe'
+- path: 'bin/MOSA Installer/MOSA-Installer.exe'
 

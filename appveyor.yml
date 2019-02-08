@@ -70,5 +70,5 @@ for:
 #      project: Source/Mosa.sln
 
     build_script:
-    - sh: echo ${PWD}; git branch; ls -l ${PWD} ; ls -l ${PWD}/Ressources; ls -l ${PWD}/Ressources/docker-integration
+    - sh: echo ${PWD}; ls -l ${PWD} ; ls -l ${PWD}/Ressources; ls -l ${PWD}/Ressources/docker-integration
     - sh: docker run --name MOSA -v ${PWD}/Ressources/docker-integration/start:/home/mosa/start2 seblon/mosa-docker-integration /bin/bash -c /home/mosa/start2

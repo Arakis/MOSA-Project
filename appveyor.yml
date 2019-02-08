@@ -73,4 +73,4 @@ for:
 #    - sh: echo $APPVEYOR_BUILD_FOLDER; ls -l $APPVEYOR_BUILD_FOLDER; 
 #    - sh: echo $PWD; ls -l; ls -l $PWD ; echo blubb; ls -l $PWD/Ressources; ls -l $PWD/Ressources/docker-integration
     - sh: echo UID "$UID"
-    - sh: docker run --name MOSA -v $APPVEYOR_BUILD_FOLDER/Ressources/docker-integration/start:/home/mosa/start2 seblon/mosa-docker-integration /bin/bash -c useradd -m -u $UID appveyor sudo && su appveyor -- -c 'echo $UID'
+    - sh: docker run --name MOSA -v $APPVEYOR_BUILD_FOLDER/Ressources/docker-integration/start:/home/mosa/start2 seblon/mosa-docker-integration /bin/bash -c useradd -m -u $UID appveyor && su appveyor -- -c 'echo $UID'

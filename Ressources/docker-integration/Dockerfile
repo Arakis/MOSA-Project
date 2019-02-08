@@ -15,5 +15,5 @@ RUN apt-get install -y git wget
 
 RUN useradd -m mosa
 
-USER mosa
-WORKDIR /home/mosa
+#USER mosa
+#WORKDIR /home/mosa

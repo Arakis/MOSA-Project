@@ -71,4 +71,4 @@ for:
 
     build_script:
     - sh: echo test
-    - sh: docker run -it --name MOSA -v ${PWD}/Ressources/docker-integration/start:/home/mosa/start seblon/mosa-docker-integration /bin/bash -c /home/mosa/start
+    - sh: docker run --name MOSA -v ${PWD}/Ressources/docker-integration/start:/home/mosa/start seblon/mosa-docker-integration /bin/bash -c /home/mosa/start

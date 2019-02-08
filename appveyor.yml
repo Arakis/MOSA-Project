@@ -8,44 +8,53 @@ image:
 
 shallow_clone: true
 
-install:
-#- cmd: choco install InnoSetup
-- cmd: SET PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5
+for:
+-
+  matrix:
+    - image: Visual Studio 2017
 
-before_build:
-- sh: sudo apt-key adv --no-tty --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-- sh: echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-- sh: sudo apt update
-- sh: sudo apt-get install -y mono-devel
-- sh: sudo apt-get install -y qemu-system-x86
 
-- nuget restore -Verbosity quiet Source/Mosa.sln
+  install:
+  #- cmd: choco install InnoSetup
+  - cmd: SET PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5
 
-build:
-  verbosity: minimal
-  parallel: true
-  project: Source/Mosa.sln
-  publish_nuget: true
+  before_build:
+  - nuget restore -Verbosity quiet Source/Mosa.sln
 
-after_build:
-- cmd: ISCC.exe Source/Inno-Setup-Script/Mosa-Installer.iss
+  build:
+    verbosity: minimal
+    parallel: true
+    project: Source/Mosa.sln
+    publish_nuget: true
 
-build_script:
+  after_build:
+  - cmd: ISCC.exe Source/Inno-Setup-Script/Mosa-Installer.iss
 
-after_test:
+  build_script:
 
-nuget:
-  project_feed: true
+  after_test:
 
-test: off
+  nuget:
+    project_feed: true
 
-assembly_info:
-  patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
+  test: off
 
-artifacts:
-- path: 'bin/MOSA Installer/MOSA-Installer.exe'
+  assembly_info:
+    patch: true
+    file: AssemblyInfo.*
+    assembly_version: "{version}"
+    assembly_file_version: "{version}"
+    assembly_informational_version: "{version}"
 
+  artifacts:
+  - path: 'bin/MOSA Installer/MOSA-Installer.exe'
+
+for:
+- matrix:
+    - image: Ubuntu1804
+
+    install:
+    - sh: docker pull seblon/mosa-docker-integration
+
+    build:
+    - sh: echo test

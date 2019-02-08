@@ -61,9 +61,10 @@ for:
     - sh: docker pull seblon/mosa-docker-integration
 
     build:
-      verbosity: minimal
+#      verbosity: minimal
       parallel: true
       project: Source/Mosa.sln
 
     build_script:
     - sh: echo test
+    - sh: error-test

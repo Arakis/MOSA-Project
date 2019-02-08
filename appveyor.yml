@@ -13,12 +13,12 @@ install:
 - cmd: SET PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5
 
 before_build:
-- nuget restore -Verbosity quiet Source/MOSA.sln
+- nuget restore -Verbosity quiet Source/Mosa.sln
 
 build:
   verbosity: minimal
   parallel: true
-  project: Source/MOSA.sln
+  project: Source/Mosa.sln
   publish_nuget: true
 
 after_build:

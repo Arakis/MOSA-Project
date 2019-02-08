@@ -13,7 +13,7 @@ RUN apt-get install -y qemu-system-x86
 
 RUN apt-get install -y git wget
 
-RUN useradd -m mosa
+#RUN useradd -m mosa
 
 #USER mosa
 #WORKDIR /home/mosa

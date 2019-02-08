@@ -58,5 +58,7 @@ for:
     install:
     - sh: docker pull seblon/mosa-docker-integration
 
+    - build: off
+
     build_script:
     - sh: echo test

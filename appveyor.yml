@@ -8,6 +8,8 @@ image:
 
 shallow_clone: true
 
+build: off
+
 for:
   -
     matrix:

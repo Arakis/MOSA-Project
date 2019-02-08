@@ -49,7 +49,6 @@ for:
     artifacts:
     - path: 'bin/MOSA Installer/MOSA-Installer.exe'
 
-for:
   -
     matrix:
       - image: Ubuntu1804

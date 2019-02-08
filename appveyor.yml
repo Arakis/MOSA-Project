@@ -22,7 +22,6 @@ for:
     - cmd: SET PATH=%PATH%;C:\Program Files (x86)\Inno Setup 5
 
     before_build:
-    - echo before build
     - nuget restore -Verbosity quiet Source/Mosa.sln
 
     build:
@@ -37,7 +36,7 @@ for:
     build_script:
 
     test_script:
-    - ps: ./mosactl.ps1 test
+    - cmd: ./mosactl.ps1 test
 
     after_test:
 

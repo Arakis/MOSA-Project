@@ -393,10 +393,9 @@ namespace Mosa.Tool.Mosactl
 
 			p.WaitForExit();
 
-			//if (p.ExitCode > 0)
 			Console.WriteLine("Qemu exit code " + p.ExitCode);
 
-			return p.ExitCode == 0 || p.ExitCode == 137;
+			return p.ExitCode == 0 || p.ExitCode == 137 || p.ExitCode == -1;
 		}
 
 		public void TaskDebug(List<string> args)

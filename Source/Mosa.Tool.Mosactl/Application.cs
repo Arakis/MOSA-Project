@@ -128,8 +128,6 @@ namespace Mosa.Tool.Mosactl
 					PrintHelp("usage");
 					break;
 			}
-
-			Console.WriteLine("C=0");
 		}
 
 		private string OsName = "all";
@@ -150,7 +148,7 @@ namespace Mosa.Tool.Mosactl
 
 			if (!File.Exists(GetEnv(ExpandKernelBinPath(OsName) + ".exe")) || ct == CheckType.force)
 			{
-				if (!CallProcess(SourceDir, GetEnv("MOSA_MSBUILD"), ExpandKernelCsProjPath(OsName), "-verbosity minimal"))
+				if (!CallProcess(SourceDir, GetEnv("MOSA_MSBUILD"), ExpandKernelCsProjPath(OsName), "-verbosity:minimal"))
 					return false;
 			}
 			return true;
@@ -293,12 +291,8 @@ namespace Mosa.Tool.Mosactl
 			if (!CallQemu(true, (line, proc) =>
 			 {
 
-				 Console.WriteLine("Got Line: '" + line + "'");
-
 				 if (line == "<TEST:PASSED:Boot.Main>")
 				 {
-					 Console.WriteLine("Test PASSED2");
-
 					 testSuccess = true;
 					 proc.Kill();
 				 }

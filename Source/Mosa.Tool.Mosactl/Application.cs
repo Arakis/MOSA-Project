@@ -175,6 +175,10 @@ namespace Mosa.Tool.Mosactl
 			var proc = Process.Start(start);
 			proc.WaitForExit();
 
+			if (proc.ExitCode > 0) {
+				Console.WriteLine("Exit Code " + proc.ExitCode);
+			}
+
 			return proc.ExitCode == 0;
 		}
 
@@ -382,6 +386,9 @@ namespace Mosa.Tool.Mosactl
 
 
 			p.WaitForExit();
+
+			if (p.ExitCode > 0)
+				Console.WriteLine("Qemu exit code " + p.ExitCode);
 
 			return p.ExitCode == 0 || p.ExitCode == 137;
 		}

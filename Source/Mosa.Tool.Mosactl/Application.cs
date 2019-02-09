@@ -128,6 +128,8 @@ namespace Mosa.Tool.Mosactl
 					PrintHelp("usage");
 					break;
 			}
+
+			Console.WriteLine("C=0");
 		}
 
 		private string OsName = "all";

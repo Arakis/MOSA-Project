@@ -175,7 +175,8 @@ namespace Mosa.Tool.Mosactl
 			var proc = Process.Start(start);
 			proc.WaitForExit();
 
-			if (proc.ExitCode > 0) {
+			if (proc.ExitCode > 0)
+			{
 				Console.WriteLine("Exit Code " + proc.ExitCode);
 			}
 
@@ -291,6 +292,9 @@ namespace Mosa.Tool.Mosactl
 			var testSuccess = false;
 			if (!CallQemu(true, (line, proc) =>
 			 {
+
+				 Console.WriteLine("Got Line: " + line);
+
 				 if (line == "<TEST:PASSED:Boot.Main>")
 				 {
 					 testSuccess = true;
@@ -363,7 +367,8 @@ namespace Mosa.Tool.Mosactl
 					}
 					else
 					{
-						sb.Append(buf[0]);
+						if (buf[0] != '\r')
+							sb.Append(buf[0]);
 					}
 
 				}

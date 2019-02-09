@@ -290,8 +290,7 @@ namespace Mosa.Tool.Mosactl
 			var testSuccess = false;
 			if (!CallQemu(true, (line, proc) =>
 			 {
-
-				 if (line == "<TEST:PASSED:Boot.Main>")
+				 if (line == "<SELFTEST:PASSED>")
 				 {
 					 testSuccess = true;
 					 proc.Kill();

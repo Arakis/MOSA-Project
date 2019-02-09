@@ -86,6 +86,7 @@ namespace Mosa.Tool.Mosactl
 			if (args.Count == 0)
 			{
 				PrintHelp("usage");
+				Environment.Exit(1);
 				return;
 			}
 
@@ -123,10 +124,15 @@ namespace Mosa.Tool.Mosactl
 				case "debug":
 					TaskDebug(args);
 					break;
+				case "help":
+					PrintHelp("usage");
+					break;
 			}
 		}
 
-		private string OsName = "HelloWorld";
+		private string OsName = "all";
+
+		private string[] OsNames = new string[] { "helloworld", "coolworld" };
 
 		private void PrintHelp(string name)
 		{
@@ -257,10 +263,24 @@ namespace Mosa.Tool.Mosactl
 			return true;
 		}
 
+		public bool TaskTestAll(List<string> args)
+		{
+			foreach (var osName in OsNames)
+				if (!CallProcess(BinDir, GetEnv("${MOSA_BIN}/Mosa.Tool.Mosactl.exe"), "test", osName))
+					return false;
+
+			return true;
+		}
+
 		public bool TaskTest(List<string> args)
 		{
-			TaskCILBuild(CheckType.changed, args);
-			TaskBinaryBuild(CheckType.changed, args);
+			if (OsName == "all")
+				return TaskTestAll(args);
+
+			if (!TaskCILBuild(CheckType.changed, args))
+				return false;
+			if (!TaskBinaryBuild(CheckType.changed, args))
+				return false;
 
 			var testSuccess = false;
 			if (!CallQemu(true, (line, proc) =>
@@ -361,7 +381,7 @@ namespace Mosa.Tool.Mosactl
 
 			p.WaitForExit();
 
-			return p.ExitCode == 0;
+			return p.ExitCode == 0 || p.ExitCode == 137;
 		}
 
 		public void TaskDebug(List<string> args)

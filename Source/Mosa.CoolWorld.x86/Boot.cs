@@ -199,7 +199,7 @@ namespace Mosa.CoolWorld.x86
 			var manager = new AppManager(Console, keyboard);
 
 			IDT.SetInterruptHandler(manager.ProcessInterrupt);
-
+return;
 			Logger.Log("<TEST:PASSED:Boot.Main>");
 
 			manager.Start();

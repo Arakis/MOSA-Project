@@ -1,6 +1,8 @@
 ﻿// Copyright (c) MOSA Project. Licensed under the New BSD License.
 
+using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace Mosa.FileSystem.FAT
 {
@@ -37,17 +39,17 @@ namespace Mosa.FileSystem.FAT
 		/// <summary>
 		///
 		/// </summary>
-		protected long position;
+		protected uint position;
 
 		/// <summary>
 		///
 		/// </summary>
-		protected long length;
+		protected uint length;
 
 		/// <summary>
 		///
 		/// </summary>
-		protected long lengthOnDisk;
+		protected uint lengthOnDisk;
 
 		/// <summary>
 		///
@@ -269,7 +271,7 @@ namespace Mosa.FileSystem.FAT
 			if (position >= length)
 				return -1;  // EOF
 
-			uint index = (uint)(position % clusterSize);
+			uint index = position % clusterSize;
 			position++;
 
 			if (index == 0)
@@ -299,18 +301,19 @@ namespace Mosa.FileSystem.FAT
 		/// </exception>
 		public override long Seek(long offset, SeekOrigin origin)
 		{
-			long newposition = position;
+			CheckPosition(offset);
+			uint newposition = position;
 
 			switch (origin)
 			{
-				case SeekOrigin.Begin: newposition = offset; break;
-				case SeekOrigin.Current: newposition = position + offset; break;
-				case SeekOrigin.End: newposition = length + offset; break;
+				case SeekOrigin.Begin: newposition = (uint)offset; break;
+				case SeekOrigin.Current: newposition = position + (uint)offset; break;
+				case SeekOrigin.End: newposition = length + (uint)offset; break;
 			}
 
 			// find cluster number of new position
-			uint newNthCluster = (uint)(newposition / clusterSize);
-			uint currentNthCluster = (uint)(position / clusterSize);
+			uint newNthCluster = newposition / clusterSize;
+			uint currentNthCluster = position / clusterSize;
 			int diff = (int)(newNthCluster - currentNthCluster);
 
 			uint newCluster = 0;
@@ -436,12 +439,14 @@ namespace Mosa.FileSystem.FAT
 		/// </exception>
 		public override void SetLength(long value)
 		{
+			CheckPosition(value);
+
 			if (value == lengthOnDisk)
 				return;
 
-			lengthOnDisk = value;
+			lengthOnDisk = (uint)value;
 
-			fs.UpdateLength((uint)lengthOnDisk, startCluster, directorySector, directorySectorIndex);
+			fs.UpdateLength(lengthOnDisk, startCluster, directorySector, directorySectorIndex);
 		}
 
 		/// <summary>
@@ -499,7 +504,7 @@ namespace Mosa.FileSystem.FAT
 		/// </exception>
 		public override void WriteByte(byte value)
 		{
-			uint index = (uint)(position % clusterSize);
+			uint index = position % clusterSize;
 
 			if (index == 0)
 			{
@@ -515,5 +520,13 @@ namespace Mosa.FileSystem.FAT
 				length = position;
 			}
 		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private void CheckPosition(long position)
+		{
+			if (position >= uint.MaxValue)
+				throw new ArgumentException("FAT File Size is limited to 4 GB");
+		}
+
 	}
 }

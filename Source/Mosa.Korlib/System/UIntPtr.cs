@@ -78,7 +78,7 @@ namespace System
 		}
 
 		[NonVersionable]
-		public static unsafe explicit operator void* (UIntPtr value)
+		public static unsafe explicit operator void*(UIntPtr value)
 		{
 			return value._value;
 		}
@@ -148,7 +148,7 @@ namespace System
 
 		public unsafe override string ToString()
 		{
-			return ((long)_value).ToString();
+			return ((ulong)_value).ToString();
 		}
 	}
 }

@@ -50,7 +50,7 @@ namespace System
 			uint temp;
 			bool negative = false;
 
-			if (value < 0 && !hex && signed)
+			if ((int)value < 0 && !hex && signed)
 			{
 				count++;
 				uvalue = (uint)-value;

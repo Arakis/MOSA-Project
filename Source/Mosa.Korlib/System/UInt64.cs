@@ -33,5 +33,16 @@ namespace System
 		{
 			return (int)_value;
 		}
+
+		public override string ToString()
+		{
+			return long.CreateString(_value, false, false);
+		}
+
+		public string ToString(string format)
+		{
+			return long.CreateString(_value, false, true);
+		}
+
 	}
 }

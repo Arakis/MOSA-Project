@@ -1,9 +1,6 @@
 name: Tests
 # This workflow is triggered on pushes to the repository.
-on:
-  push:
-    tags-ignore:
-      - "**"
+on: [push]
 
 jobs:
   build-unix:

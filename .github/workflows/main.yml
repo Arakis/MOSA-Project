@@ -3,8 +3,9 @@ name: Tests
 on:
   push:
     branch:
+      - "*"
     tags-ignore:
-      - v*
+      - "v*
 
 
 jobs:

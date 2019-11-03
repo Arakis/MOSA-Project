@@ -2,11 +2,8 @@ name: Tests
 # This workflow is triggered on pushes to the repository.
 on:
   push:
-    branch:
-      - "master"
     tags-ignore:
-      - "v*"
-
+      - "**"
 
 jobs:
   build-unix:

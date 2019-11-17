@@ -43,6 +43,11 @@ namespace Mosa.Runtime
 		public static extern Pointer GetValueTypeAddress<T>(T obj) where T : struct;
 
 		[MethodImpl(MethodImplOptions.InternalCall)]
+		public static extern ref TTo CastRef<TFrom, TTo>(ref TFrom source);
+		[MethodImpl(MethodImplOptions.InternalCall)]
+		public static extern unsafe void* RefToPointer<T>(ref T source);
+
+		[MethodImpl(MethodImplOptions.InternalCall)]
 		public static extern ushort Load16(Pointer address);
 
 		[MethodImpl(MethodImplOptions.InternalCall)]

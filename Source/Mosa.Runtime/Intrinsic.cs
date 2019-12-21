@@ -45,6 +45,8 @@ namespace Mosa.Runtime
 		[MethodImpl(MethodImplOptions.InternalCall)]
 		public static extern ref TTo CastRef<TFrom, TTo>(ref TFrom source);
 		[MethodImpl(MethodImplOptions.InternalCall)]
+		public static extern ref T CastRefFromStruct<T>(in T source);
+		[MethodImpl(MethodImplOptions.InternalCall)]
 		public static extern unsafe void* RefToPointer<T>(ref T source);
 
 		[MethodImpl(MethodImplOptions.InternalCall)]
